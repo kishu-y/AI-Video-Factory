@@ -1,6 +1,7 @@
 import { query, type Options, type SDKResultMessage, type SDKUserMessage } from "@anthropic-ai/claude-agent-sdk";
 import { LocalizedError, modelFor, msg, type ModelSettings, type Msg, type Text } from "@ys/core";
 import { z } from "zod";
+import { runManualStructured } from "./manual.ts";
 
 export type QueryFn = typeof query;
 
@@ -157,6 +158,10 @@ const RETRY_DELAYS_MS = [2000, 5000];
  * Alt süreç çökerse (sonuç mesajı gelmeden) iki kez daha denenir; modelin kendi hataları (tur sınırı, şema) denenmez.
  */
 export async function runStructured<T>(call: AgentCall<T>, deps: AgentDeps = {}): Promise<AgentResult<T>> {
+  if (process.env.YS_AGENT_BACKEND === "manual" && !deps.queryFn) {
+    return runManualStructured(call, deps);
+  }
+
   // Düşen denemelerin harcadığı para kaybolmasın: başarılı sonuca (ya da son hataya) eklenir.
   let failedCost = 0;
   for (let attempt = 0; ; attempt++) {
