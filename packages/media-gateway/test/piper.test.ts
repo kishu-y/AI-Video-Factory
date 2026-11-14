@@ -17,7 +17,7 @@ describe("Piper TTS", () => {
     const model = join(dir, "en_US-lessac-medium.onnx");
     writeFileSync(model, "test-model");
 
-    const enabled = createProvidersFromEnv({ PIPER_MODEL: model, PIPER_EXE: "piper.exe" }, dir);
+    const enabled = createProvidersFromEnv({ NODE_ENV: "test", PIPER_MODEL: model, PIPER_EXE: "piper.exe" }, dir);
     expect(enabled.providers.map((p) => p.id)).toEqual(["piper:local"]);
     expect(enabled.providers[0]).toMatchObject({
       local: true,
@@ -26,7 +26,7 @@ describe("Piper TTS", () => {
       price: { unit: "free" },
     });
 
-    const absent = createProvidersFromEnv({ PIPER_MODEL: join(dir, "missing.onnx") }, dir);
+    const absent = createProvidersFromEnv({ NODE_ENV: "test", PIPER_MODEL: join(dir, "missing.onnx") }, dir);
     expect(absent.providers).toHaveLength(0);
     expect(absent.skipped).toHaveLength(5);
   });
