@@ -56,9 +56,41 @@ describe("manual agent backend", () => {
     await expect(runStructured(exampleCall)).rejects.toThrow(/schema validation/);
   });
 
-  it("does not silently drop image input", async () => {
+  it("exports image inputs and schema for manual visual review", async () => {
+    const dir = await setup();
+    const call = { ...exampleCall, images: [{ mimeType: "image/png", data: new Uint8Array([1, 2, 3]) }] };
+    await expect(runStructured(call)).rejects.toThrow(/Manual agent response needed/);
+
+    const requests = (await readdir(join(dir, "requests"))).filter((name) => name.endsWith(".json"));
+    expect(requests).toHaveLength(1);
+    const request = JSON.parse(await readFile(join(dir, "requests", requests[0]!), "utf8"));
+    expect(request.images).toHaveLength(1);
+    expect(request.images[0].mimeType).toBe("image/png");
+    expect(Array.from(await readFile(request.images[0].path))).toEqual([1, 2, 3]);
+
+    await writeFile(request.responseFile, JSON.stringify({ title: "Reviewed", scenes: ["All good"] }));
+    const result = await runStructured(call);
+    expect(result.data.title).toBe("Reviewed");
+  });
+
+  it("does not reuse an image-review answer for a changed image", async () => {
+    const dir = await setup();
+    const first = { ...exampleCall, images: [{ mimeType: "image/png", data: new Uint8Array([1]) }] };
+    const second = { ...exampleCall, images: [{ mimeType: "image/png", data: new Uint8Array([2]) }] };
+
+    await expect(runStructured(first)).rejects.toThrow(/response needed/);
+    const firstFile = (await readdir(join(dir, "requests"))).find((name) => name.endsWith(".json"))!;
+    await writeFile(join(dir, "responses", firstFile), JSON.stringify({ title: "Old drawing", scenes: ["Checked"] }));
+
+    await expect(runStructured(second)).rejects.toThrow(/response needed/);
+    const files = (await readdir(join(dir, "requests"))).filter((name) => name.endsWith(".json"));
+    expect(files).toHaveLength(2);
+    expect(files).toContain(firstFile);
+  });
+
+  it("rejects unsupported image MIME types", async () => {
     await setup();
-    await expect(runStructured({ ...exampleCall, images: [{ mimeType: "image/png", data: new Uint8Array([1]) }] }))
-      .rejects.toThrow(/does not support/);
+    await expect(runStructured({ ...exampleCall, images: [{ mimeType: "image/bmp", data: new Uint8Array([1]) }] }))
+      .rejects.toThrow(/Unsupported manual agent image type/);
   });
 });
