@@ -5,10 +5,9 @@ from an external assistant rather than Claude Code. It uses local JSON files, no
 ChatGPT API endpoint, and adds no paid AI agent calls. The original Claude backend
 remains the default.
 
-> This changes only the structured text agents. It does not provide image generation,
-> voice-over, video generation or image-based quality review. Those still require
-> configured media services or separate integrations. The end-to-end animation pipeline
-> has **not** been validated with this mode yet.
+> This changes structured agents and saves image-review inputs for manual evaluation.
+> Media generation still needs configured providers. The optional offline Piper adapter
+> can provide WAV voice-over without API keys. End-to-end animation quality is still unverified.
 
 ## Windows Command Prompt
 
@@ -44,10 +43,32 @@ prompt produces a different response file. Existing responses are validated with
 the agent's Zod schema on every use. A malformed or incomplete response fails
 with a clear error rather than silently continuing.
 
-Some stages use image inputs: the manual JSON backend **intentionally rejects**
-them instead of pretending to have reviewed visual content. Start by testing
-the style/story/script stages only; do not expect the complete video pipeline
-to work without further media and voice adapters.
+Some stages use image inputs: the backend writes each image to
+`.data/manual-agents/requests/images/` and lists its local path in the JSON
+request. Upload both the request JSON and its corresponding image to ChatGPT for
+a real visual review. Do not blindly approve the quality gate.
+
+## Optional: offline Piper voice-over (Windows)
+
+The Piper provider is opt-in. Set a path to an existing Piper voice model
+(`.onnx` plus adjacent `.onnx.json`). If `piper.exe` is not in PATH, specify
+its full path. No cloud API key is needed.
+
+```cmd
+cd /d C:\Users\kishu\AI-Video-Factory
+set "PIPER_MODEL=C:\path\to\en_US-lessac-medium.onnx"
+set "PIPER_EXE=C:\path\to\piper.exe"
+pnpm ys providers
+pnpm ys tts --text "Pip took a step."
+pnpm ys episode run YOUR_EPISODE_ID --until voice
+```
+
+To locate Piper on Windows, try `where piper`. The model file may be in
+your project's voices folder or the directory where Piper was installed. The
+provider uses `piper --model ... --output_file ...` and writes WAV audio; when
+Piper does not supply timestamps, the existing pipeline estimates word timing.
+Setting `PIPER_MODEL` only opts in voice generation; it does not replace paid
+image/video providers or generate sound effects.
 
 ## Run tests
 
