@@ -3,6 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { createProvidersFromEnv, PiperTtsAdapter } from "../src/index.ts";
+import { piperCliArgs } from "../src/providers/piper.ts";
 
 function wav(): Uint8Array {
   const bytes = new Uint8Array(44);
@@ -12,6 +13,15 @@ function wav(): Uint8Array {
 }
 
 describe("Piper TTS", () => {
+  it("supports the Python module launcher and the native executable", () => {
+    expect(piperCliArgs("py", "voice.onnx", "audio.wav")).toEqual([
+      "-m", "piper", "--model", "voice.onnx", "--output_file", "audio.wav",
+    ]);
+    expect(piperCliArgs("C:\\Tools\\piper.exe", "voice.onnx", "audio.wav")).toEqual([
+      "--model", "voice.onnx", "--output_file", "audio.wav",
+    ]);
+  });
+
   it("registers only with a real PIPER_MODEL file", () => {
     const dir = mkdtempSync(join(tmpdir(), "ys-piper-test-"));
     const model = join(dir, "en_US-lessac-medium.onnx");
