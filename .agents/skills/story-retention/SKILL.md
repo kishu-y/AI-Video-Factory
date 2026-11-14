@@ -18,6 +18,18 @@ Two tested examples (local user footage; do not check source media into git):
 
 Default **creative target** for narrative Shorts: 9:16 portrait, 60–120 s (30 fps; 720×1280 is an acceptable draft reference), with cinematic shot variation, expressive acting and legible captions. This is a recommendation, **not** a claim the current vector renderer supplies 3D character animation. A 10–20 s short is valid for one crisp joke or visual reversal. Longer or horizontal episodes remain user-selectable. Set duration to story needs, not arbitrary padding.
 
+## Current CLI workflow for the next story
+
+The CLI supports `--vertical` and fractional `--minutes`; **portrait is not the default**. Draft the story and script before triggering expensive stages:
+
+```cmd
+pnpm ys episode new --topic "YOUR ORIGINAL PREMISE" --lang en --minutes 1.5 --motion vector --budget 1 --manual --vertical
+pnpm ys episode run YOUR_NEW_EPISODE_ID --until script
+pnpm ys episode show YOUR_NEW_EPISODE_ID
+```
+
+Inspect the returned story/script for hook, beats, originality, visual feasibility and the scorecard **before** approving the script or running concept/voice. Under the experimental manual ChatGPT backend this still creates JSON requests; this storytelling skill does **not** automate those file exchanges, nor does `--vertical` turn vector assets into 3D models.
+
 ## Process — BEFORE art, voices or rendering
 
 1. **Premise:** Write a one-sentence want, obstacle and consequence. Specify *why the viewer cares* in ordinary words. Emotional, funny and wondrous stakes count; peril is not mandatory.
