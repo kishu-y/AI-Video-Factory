@@ -2,6 +2,12 @@
 
 Read `CLAUDE.md` for repository conventions and `docs/PROJE_PLANI.md` before changing architecture. Preserve unrelated working-tree changes. Project documentation and agent instructions are English; narration follows the episode language.
 
+## Original story development and retention
+
+For a new animated story, a weak hook, a reference-video analysis or a script rewrite, read `.agents/skills/story-retention/SKILL.md` **before** drawing assets or producing voice. Its priority is an original premise, immediate visual hook, escalating causal changes, meaningful character stakes, planted reversal and earned payoff. Treat uploaded films as examples of abstract craft, never plot templates. Prefer user approval of the story/beat map before costly media generation. Scores are editorial heuristics, not actual retention metrics.
+
+The three tool-free runtime story agents receive the compact version from `packages/agents/src/story-retention.ts`; a coding-agent skill install alone cannot affect those JSON-only runtime agents. Keep both policies aligned. A `REJECT_STORY:` script-doctor note flags a structural problem for human review; it is **not** a new blocking pipeline stage. The 9:16/60–120 s story target is guidance for narrative shorts, not a renderer or 3D capability change.
+
 ## Scene planning, animation and effects
 
 Use the installed HyperFrames skills as production runbooks whenever authoring or improving video scenes. Read only the relevant references rather than loading the entire skill catalog:
