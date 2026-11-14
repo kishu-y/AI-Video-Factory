@@ -27,8 +27,8 @@ const synthesizePiper: PiperSynthesizer = async (executable, modelPath, text, si
       signal,
     });
     let errors = "";
-    child.stderr.setEncoding("utf8");
-    child.stderr.on("data", (chunk: string) => { errors = (errors + chunk).slice(-4000); });
+    child.stderr?.setEncoding("utf8");
+    child.stderr?.on("data", (chunk: string) => { errors = (errors + chunk).slice(-4000); });
     const done = new Promise<void>((resolve, reject) => {
       child.once("error", reject);
       child.once("close", (code) => {
@@ -37,8 +37,8 @@ const synthesizePiper: PiperSynthesizer = async (executable, modelPath, text, si
       });
     });
     // Explicitly handle early exits to avoid an unhandled EPIPE.
-    child.stdin.on("error", () => {});
-    child.stdin.end(text.trim() + "\n", "utf8");
+    child.stdin?.on("error", () => {});
+    child.stdin?.end(text.trim() + "\n", "utf8");
     await done;
     return new Uint8Array(await readFile(wavFile));
   } finally {
