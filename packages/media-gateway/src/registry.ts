@@ -6,6 +6,7 @@ import { ElevenLabsMusicAdapter, ElevenLabsSfxAdapter, ElevenLabsTtsAdapter } fr
 import { FalAdapter } from "./providers/fal.ts";
 import { FAL_MODELS } from "./providers/fal-models.ts";
 import { GeminiImageAdapter, GeminiTtsAdapter, OmniVideoAdapter, VeoAdapter } from "./providers/gemini.ts";
+import { PiperTtsAdapter } from "./providers/piper.ts";
 import { msg, type Msg } from "@ys/core";
 import type { ProviderAdapter } from "./types.ts";
 
@@ -53,6 +54,13 @@ export function createProvidersFromEnv(
 ): RegistryReport {
   const providers: ProviderAdapter[] = [];
   const skipped: Msg[] = [];
+
+  // --- Offline Piper voice (PIPER_MODEL enables it; no API key) ---
+  if (env.PIPER_MODEL) {
+    const modelPath = resolve(env.PIPER_MODEL);
+    if (existsSync(modelPath)) providers.push(new PiperTtsAdapter(modelPath, env.PIPER_EXE || "piper"));
+    else skipped.push(msg("gw.text", { text: `piper:local (PIPER_MODEL not found: ${modelPath})` }));
+  }
 
   // --- Yerel GPU (ComfyUI) ---
   const manifestPath = join(comfyDir, "manifest.json");
