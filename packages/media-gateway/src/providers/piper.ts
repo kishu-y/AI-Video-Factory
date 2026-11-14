@@ -7,7 +7,7 @@
 import { spawn } from "node:child_process";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import type {
   GenerateContext, GenerationRequest, GenerationResult,
   ProviderAdapter, ProviderLimits, PriceRule,
@@ -17,11 +17,21 @@ export type PiperSynthesizer = (
   executable: string, modelPath: string, text: string, signal?: AbortSignal,
 ) => Promise<Uint8Array>;
 
+/**
+ * Accept either the installed piper.exe or the Python launcher that runs
+ * `py -m piper` (especially useful when the Scripts directory is not on PATH).
+ */
+export function piperCliArgs(executable: string, modelPath: string, wavFile: string): string[] {
+  const name = basename(executable).toLowerCase();
+  const pythonLauncher = ["py", "py.exe", "python", "python.exe", "python3", "python3.exe"].includes(name);
+  return [...(pythonLauncher ? ["-m", "piper"] : []), "--model", modelPath, "--output_file", wavFile];
+}
+
 const synthesizePiper: PiperSynthesizer = async (executable, modelPath, text, signal) => {
   const directory = await mkdtemp(join(tmpdir(), "ys-piper-"));
   const wavFile = join(directory, "narration.wav");
   try {
-    const child = spawn(executable, ["--model", modelPath, "--output_file", wavFile], {
+    const child = spawn(executable, piperCliArgs(executable, modelPath, wavFile), {
       stdio: ["pipe", "ignore", "pipe"],
       windowsHide: true,
       signal,
