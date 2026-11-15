@@ -51,3 +51,24 @@ Confirmed: the emergency ground stop ended, flights resumed, airborne aircraft l
 - No implication that a cyberattack occurred; no unsupported blame against contractor or FAA personnel.
 - Write fresh narration rather than rephrasing a single copyrighted news story extensively.
 - Review with the user **before** asset generation; this is an editorial candidate, not a ready-to-publish factual claim ledger.
+
+## Incident follow-up and audience prediction — editorial record
+
+- **Incident:** 2026-11-13-us-national-ground-stop
+- **Verification cutoff:** November 14, 2026, Eastern Time; refresh every date-sensitive number before upload.
+- **Confirmed:** The FAA stopped departures across the United States on November 13. Transportation officials reported about 3,500 aircraft airborne; departures resumed around 8:15 p.m. Eastern. https://www.transportation.gov/briefing-room/icymi-us-transportation-secretary-sean-p-duffy-announces-lifting-nationwide-ground
+- **Preliminary findings:** On November 14 officials described router overload amid copper-to-fiber telecommunications upgrade work. They had NOT concluded whether contractor error or faulty equipment was responsible. https://www.transportation.gov/briefing-room/icymi-us-transportation-secretary-sean-p-duffy-provides-update-restoration-airspace
+- **Forecast, not outcome:** FAA expected airline schedules to normalize by Sunday, November 15, 2026. https://apnews.com/article/us-flights-grounded-back-to-normal-7dce2343ceb56332aa7946a27fcae562
+- **Viewer prediction (proposed):** Will airline schedules broadly recover by Sunday night, or will extensive cancellations continue into Monday? A measurable cancellation threshold should be agreed before treating this as a scored poll.
+- **Outcome:** PENDING as of this record. No audience responses have been collected.
+- **Next check:** Sunday, November 15, 2026, airline operations and official FAA updates; separately monitor final cause and system-upgrade decisions when official findings emerge.
+- **Follow-up opening:** Last time, the FAA expected flights to recover by Sunday. Here is what the confirmed flight data now shows. Do not use this until newer dated data is retrieved.
+
+### Publication-risk safeguards for this specific case
+
+1. Headline must not say every flight worldwide was grounded. The order concerned US departures with exceptions; airborne planes landed safely.
+2. Name the vendor only in accurately attributed official context. No claim of contractor negligence or criminal sabotage without findings.
+3. Do not suggest evidence of cyberattack. Officials said they did not believe one had occurred.
+4. Flight delay/cancellation totals vary by provider and timestamp. Cite dates, metric definitions and sources for each count.
+5. Label AI-drawn air traffic maps, controller scenes and generic airport visuals as illustrations, not authentic Nov 13 footage.
+6. Check footage/music/photo rights separately from the right to report facts; give human editorial/legal review to serious allegations.
