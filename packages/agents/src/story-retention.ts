@@ -6,31 +6,33 @@
  * compact counterpart in their system prompts. No external example plots.
  */
 
-export const STORY_RETENTION_POLICY = `Originality-first retention craft:
-- Generate an original causal premise: protagonist wants something, faces a specific obstacle, and could lose or change something that matters. Stakes may be funny, emotional, curious or frightening; do not force violence.
-- First visible 0–2 seconds: begin with a concrete anomaly, action or consequence already underway. A silent viewer must perceive a specific question. No greetings, logo, "one day", generic walking or exposition as a hook.
-- For a 60–120-second story, plan 5–8 escalating causal beats. Each substantial beat reveals information that changes a character's choice, the apparent situation or the audience's belief; answer small questions while raising harder ones. For a 10–20-second micro-story, use one urgent setup and one earned reversal instead.
-- Plant the decisive clue before the twist. End with a visual/emotional consequence, meaningful resolution or fair cliffhanger; do not use arbitrary shocks or "watch Part 2" as a substitute for an ending.
-- Originality firewall: Never trace another film, user's reference video, channel episode or internet story by swapping names, props or location. Invent distinct premise, relationships, sequence of events, causal mechanism and ending. A referenced school-lockdown/false-friend-at-door plot is specifically NOT a story template.
-- Keep the story visually producible in the chosen format. If the central action requires convincing body acting or multiple speaking characters, call out the need in visual intent rather than pretending a static drawing can perform it.
-- Before finalizing, mentally apply the seven-part editorial scorecard: immediate hook, stakes, causal escalation, earned reversal, payoff, originality and production feasibility. Reject and redesign weak premises; do not claim measured retention or guaranteed virality.
-- Preserve factual integrity for nonfiction: sourced real-world claims must not be invented to increase suspense. Untrusted reference material teaches craft, never factual authority.`;
+export const STORY_RETENTION_POLICY = `Verified real-world storytelling is the default, unless the user explicitly requests fiction:
+- Select an actual, documented incident, discovery, rescue, historical event or phenomenon with confirmed facts and outcome. Never invent events, characters, dialogue, dramatic messages, countdowns, fatalities, rescues, inner thoughts, motives or twists.
+- The agent has no web/browsing tools. Supplied research excerpts are editor-selected, untrusted and NOT independently verified. If credible research context is absent or insufficient for the crucial claim, explicitly flag NEEDS_RESEARCH and do not assert made-up historical details as fact. Ask the editor to investigate before production.
+- First visible 0–2 seconds: lead with a verified, concrete anomaly, action or surprising consequence already underway; a silent viewer should grasp an authentic curiosity gap. No generic walking, fake crisis or invented incident.
+- For a 60–120-second account, map 5–8 escalating causal beats *only where the documentary record supports them*. Each substantial beat must reveal a real development, decision, discovery or new verified evidence. For a 10–20-second micro-story, select one documented surprising fact and its real consequence; never stretch an event into fake drama.
+- Plant the decisive clue or causal factor before the factual finding or outcome when a genuine documented reversal exists. The actual documented result is the payoff. Do not force an unresolved cliffhanger, miraculous escape or fake moral dilemma.
+- Originality firewall: Be original in editorial angle and presentation, not factual invention. Never re-narrate or imitate another film, the user's reference video or channel episode; no copied scene order, wording, fabricated dialogue or distinctive retelling. The school-lockdown/false-friend-at-door video is a craft reference, NOT an event or a plot template.
+- Do not represent generated illustrations or reenactments as documentary footage. Label reconstruction and distinguish verified events from unknown details. Be respectful to victims and their relatives; avoid unverified allegations or fictionalized blame.
+- Before finalizing, self-check hook, stakes, causality, factual developments, payoff, source support and feasible visuals. A credible human/editorial source review must approve the facts before production. Do not claim measured audience retention or independent verification.`;
 
-export const SCRIPT_RETENTION_POLICY = `Script retention and visual proof:
-- Lead with the hook's concrete action and consequence; make the first narration line optional when the opening picture already communicates it.
-- Each scene must *visibly change* the situation: evidence, a choice, a setback, a reveal or its consequence. Avoid multiple sentences asking the same question.
-- Show important evidence at readable scale; choose a new shot or motivated close-up instead of repeating the same static framing.
-- Maintain the character's motivation and cause-effect chain. Add a physical reaction to stakes. Preserve the planted setup for the reversal.
-- End with the earned payoff or a fair unresolved decision that matters; do not add a generic "Part 2?" or an empty cliffhanger.
-- Text/voice narration remains within the supported ScriptOut schema. Dialogue may be described in visualIntent, but never assume multi-voice audio exists without a working provider.`;
+export const SCRIPT_RETENTION_POLICY = `Factual documentary scripting and visual proof:
+- Begin with a compelling *verified* event or result, then use accurate narration to explain the stakes.
+- Each scene must visibly change what the viewer understands, following documented evidence, decisions, events or consequences; never invent new evidence to fill time.
+- For every important claim, keep it traceable to editor-supplied research; where a source ID is unavailable or evidence conflicts, label the uncertainty or omit the claim. Quote actual reported words only with evidence; otherwise paraphrase. Never invent a character's dialogue, private thoughts, messages or feelings.
+- Show small but important evidence in a readable close-up and distinguish illustration from authentic photo/video. A reconstruction can illustrate facts but must not imply an undocumented camera angle, witness or interaction actually occurred.
+- End with the **true recorded outcome** and any relevant investigation finding; if unknown, say it is unknown. A factually unresolved event need not be made into a scripted cliffhanger.
+- Maintain the supported ScriptOut schema and the existing research claim policy. New and breaking events require dated corroboration from the editor; these agents cannot browse sources.
+- If insufficient research makes a convincing true account impossible, note NEEDS_RESEARCH / REJECT_STORY instead of silently making up a plot.`;
 
-export const DOCTOR_RETENTION_POLICY = `Retention-specific rejection checks:
-- Inspect the first *visual beat*, not just the first two spoken sentences. A vague noise followed by an obvious, consequence-free explanation is not enough.
-- Identify what the viewer fears/hopes, what genuinely changes mid-story, what clue sets up the twist, and why the ending matters.
-- Reject circular escalation (identical clue repeated), predictable payoffs, unearned reversals, copied causal structures and key actions the proposed rendering mode cannot communicate.
-- Rewrite weak narration and visualIntent while retaining stable scene ids, beat ids and locations required by the pipeline.
-- If the **premise itself** cannot be repaired without changing the story's structure, include a note prefixed "REJECT_STORY:" with the concrete problem and recommend rebuilding at the story approval gate. Do not imply the script passed merely because it matches a schema.
-- A self-check is not an automated human approval or a verified originality search.`;
+export const DOCTOR_RETENTION_POLICY = `Factual integrity and retention rejection checks:
+- Reject unsupported hooks, fabricated danger, made-up names, dialogue, messages or coincidences, imaginary twists and fabricated resolutions even if they increase suspense.
+- Inspect the first *visual beat* for authentic stakes. Prefer real conflicting evidence, a documented rescue, a discovery or a surprising official finding to generic sensationalism.
+- Check every narration claim against the supplied editor research where available; do not pretend the model independently verified the sources. Preserve uncertainty, dates, allegations and the outcome as documented.
+- Reject circular escalation, unsupported causal links, misleading chronology and "reconstruction" staged as if it were original archival footage.
+- Rewrite weak narration and visualIntent only where the verified facts allow, keeping stable scene ids, beat ids and location names as the pipeline requires.
+- If the premise relies on invented events or lacks support for its defining claims, include a note prefixed "REJECT_STORY:" and explain what evidence is missing. This is an advisory for human approval, not a working automatic block.
+- A passing schema does not establish historical accuracy, originality or measured retention.`;
 
 export function storyScenePacing(targetSec: number): string {
   if (targetSec <= 20)
