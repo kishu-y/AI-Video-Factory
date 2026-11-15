@@ -14,8 +14,8 @@ describe("story-retention runtime policy", () => {
     expect(STORY_RETENTION_POLICY).toContain("verification cutoff date/time");
     expect(STORY_RETENTION_POLICY).toContain("viewer-prediction question");
     expect(STORY_RETENTION_POLICY).toContain("potential defamation");
-    expect(SCRIPT_RETENTION_POLICY).toContain("neutral, verifiable viewer prediction");
-    expect(DOCTOR_RETENTION_POLICY).toContain("copyright/license review");
+    expect(SCRIPT_RETENTION_POLICY).toContain("one fair, checkable viewer prediction");
+    expect(DOCTOR_RETENTION_POLICY).toContain("missing commercial media rights");
     expect(STORY_RETENTION_POLICY).toContain("Never invent events, characters, dialogue");
     expect(SCRIPT_RETENTION_POLICY).toContain("true recorded outcome");
     expect(DOCTOR_RETENTION_POLICY).toContain("unsupported hooks");
