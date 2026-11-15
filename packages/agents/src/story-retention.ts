@@ -14,7 +14,9 @@ export const STORY_RETENTION_POLICY = `Verified real-world storytelling is the d
 - Plant the decisive clue or causal factor before the factual finding or outcome when a genuine documented reversal exists. The actual documented result is the payoff. Do not force an unresolved cliffhanger, miraculous escape or fake moral dilemma.
 - Originality firewall: Be original in editorial angle and presentation, not factual invention. Never re-narrate or imitate another film, the user's reference video or channel episode; no copied scene order, wording, fabricated dialogue or distinctive retelling. The school-lockdown/false-friend-at-door video is a craft reference, NOT an event or a plot template.
 - Do not represent generated illustrations or reenactments as documentary footage. Label reconstruction and distinguish verified events from unknown details. Be respectful to victims and their relatives; avoid unverified allegations or fictionalized blame.
-- Before finalizing, self-check hook, stakes, causality, factual developments, payoff, source support and feasible visuals. A credible human/editorial source review must approve the facts before production. Do not claim measured audience retention or independent verification.`;
+- Before finalizing, self-check hook, stakes, causality, factual developments, payoff, source support and feasible visuals. A credible human/editorial source review must approve the facts before production. Do not claim measured audience retention or independent verification.
+- Ongoing events: record the verification cutoff date/time, what is confirmed, what officials are still investigating, and any specific future milestone worth following up. Offer a neutral, verifiable viewer-prediction question about an unresolved outcome only when appropriate. Viewer prediction is not proof or a journalist's forecast. Never invent next events.
+- Legal/rights editorial screen: do not assert unproven blame against a named company or person, present speculative cause as final, copy a news article's wording or use unlicensed footage/music. Label illustrative AI reconstructions, avoid fake eyewitness footage/quotes, and flag potential defamation, privacy, synthetic-media-disclosure, copyright and sponsor-disclosure issues before publication. These agents cannot give legal clearance.`;
 
 export const SCRIPT_RETENTION_POLICY = `Factual documentary scripting and visual proof:
 - Begin with a compelling *verified* event or result, then use accurate narration to explain the stakes.
@@ -23,7 +25,9 @@ export const SCRIPT_RETENTION_POLICY = `Factual documentary scripting and visual
 - Show small but important evidence in a readable close-up and distinguish illustration from authentic photo/video. A reconstruction can illustrate facts but must not imply an undocumented camera angle, witness or interaction actually occurred.
 - End with the **true recorded outcome** and any relevant investigation finding; if unknown, say it is unknown. A factually unresolved event need not be made into a scripted cliffhanger.
 - Maintain the supported ScriptOut schema and the existing research claim policy. New and breaking events require dated corroboration from the editor; these agents cannot browse sources.
-- If insufficient research makes a convincing true account impossible, note NEEDS_RESEARCH / REJECT_STORY instead of silently making up a plot.`;
+- If insufficient research makes a convincing true account impossible, note NEEDS_RESEARCH / REJECT_STORY instead of silently making up a plot.
+- For an unresolved incident, conclude with facts to date and one fair, checkable viewer prediction linked to a dated official milestone; don't conflate the audience's guess with an asserted outcome. Keep material allegations attributed, and do not copy another publication's prose.
+- Flag any proposed news footage or staged illustration that needs copyright/license review or realistic-AI disclosure. Provide the editorial check in visual intent without inventing support in the narration.`;
 
 export const DOCTOR_RETENTION_POLICY = `Factual integrity and retention rejection checks:
 - Reject unsupported hooks, fabricated danger, made-up names, dialogue, messages or coincidences, imaginary twists and fabricated resolutions even if they increase suspense.
@@ -32,6 +36,8 @@ export const DOCTOR_RETENTION_POLICY = `Factual integrity and retention rejectio
 - Reject circular escalation, unsupported causal links, misleading chronology and "reconstruction" staged as if it were original archival footage.
 - Rewrite weak narration and visualIntent only where the verified facts allow, keeping stable scene ids, beat ids and location names as the pipeline requires.
 - If the premise relies on invented events or lacks support for its defining claims, include a note prefixed "REJECT_STORY:" and explain what evidence is missing. This is an advisory for human approval, not a working automatic block.
+- Validate the future-looking ending: is it explicitly a question/forecast instead of a prediction passed off as fact? A later event requires new source verification and a dated follow-up. Never imply comments or polls were collected if they were not.
+- Escalate legal-risk language: unproven contractor culpability, allegations framed as guilt, misleading edited footage, fake dialogue, missing commercial media rights, identifiable private individuals, and official headlines that do not match their sources. If unfixable from supplied research, include a REJECT_STORY: note.
 - A passing schema does not establish historical accuracy, originality or measured retention.`;
 
 export function storyScenePacing(targetSec: number): string {
