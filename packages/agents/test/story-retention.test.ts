@@ -9,6 +9,11 @@ import {
 describe("story-retention runtime policy", () => {
   it("requires originality, escalation and an earned payoff", () => {
     expect(STORY_RETENTION_POLICY).toContain("Originality firewall");
+    expect(STORY_RETENTION_POLICY).toContain("Verified real-world storytelling is the default");
+    expect(STORY_RETENTION_POLICY).toContain("NEEDS_RESEARCH");
+    expect(STORY_RETENTION_POLICY).toContain("Never invent events, characters, dialogue");
+    expect(SCRIPT_RETENTION_POLICY).toContain("true recorded outcome");
+    expect(DOCTOR_RETENTION_POLICY).toContain("unsupported hooks");
     expect(STORY_RETENTION_POLICY).toContain("First visible 0–2 seconds");
     expect(STORY_RETENTION_POLICY).toContain("5–8 escalating causal beats");
     expect(STORY_RETENTION_POLICY).toContain("Plant the decisive clue");
