@@ -140,6 +140,17 @@ For each candidate supply:
 - A story dependent on walking, handoffs or facial acting when the chosen mode cannot convincingly animate them.
 - Forced danger or unresolved cliffhangers in every episode; vary wonder, humor, irony, empathy, mystery and triumph.
 
+## Character-led animation and audio acceptance checks
+
+Lessons from the November 16 O'Keeffe prototype and user feedback:
+
+- **Characters first:** Show visible people who perform the sourced actions (hang painting, notice it, move a crate, open a closet, hand off an artifact, inspect it). Avoid a slide deck of labels, generic stock shapes and static title cards. Respect the actual known identities; stylized generic figures must not be misrepresented as documentary photographs or exact portraits.
+- **Physical continuity:** Keep consistent character design, screen direction, location, prop placement and scale. Animate intentional movement, eye focus, hands and object interactions with contact, rather than relying only on zoom and pan. Use readable close-ups to show the action that matters.
+- **Clear natural speech:** The narration must be intelligible at normal phone volume. Prioritize high-quality natural voice performance, correct names and dates, careful pacing, clean silence, measured loudness, modest compression, and low music beneath speech. A technically valid MP4 or active audio track does not prove the voice is clear: listen to the exported file and review for clipping, robotic artifacts, poor diction and masking.
+- **No template clutter:** Do not automatically overlay `TRUE STORY / 001`, episode numbering, `ILLUSTRATED RECONSTRUCTION` or other repetitive boilerplate in a stylized cartoon frame. Use the screen for cinematic story beats, short captions and source-based numbers. Continue complying with applicable platform rules for realistic synthetic media, and distinguish stylized reenactments from archival proof in supporting metadata when needed.
+- **Motion mode honesty:** A moving cutout plus camera pan is a moving 2D illustration, not fully articulated 3D animation. Report the actual visual result and do not claim full character acting if it is absent. Test walking, hand-object contact and reveal timing in a short motion sample before final production.
+- **Pre-publication audience test:** On mute, can a viewer follow the key physical events? With eyes closed, can the words be understood clearly? Does the cut keep character/action continuity? If not, revise rather than declaring success after file export.
+
 ## Next-production quality loop
 
 1. Verify sources and approve the factual story and storyboard **before** generation.
