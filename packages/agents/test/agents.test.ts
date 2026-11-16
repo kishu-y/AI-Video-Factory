@@ -115,6 +115,24 @@ describe("senaryo ajanları", () => {
     expect(e.prompt).toBe("Topic: Pony Express\nAudience: adults\nStyle hint: noir");
   });
 
+  it("injects the original-retention skill policies into story, screenplay and doctor agents", async () => {
+    const a = await capture((d) => storyArchitect(brief, d));
+    expect(a.system).toContain("Originality firewall");
+    expect(a.system).toContain("Verified real-world storytelling is the default");
+    expect(a.system).toContain("NEEDS_RESEARCH");
+    expect(a.system).toContain("First visible 0–2 seconds");
+    expect(a.system).toContain("school-lockdown/false-friend-at-door");
+
+    const b = await capture((d) => screenwriter({ ...brief, targetSec: 10 }, story, d));
+    expect(b.system).toContain("1–3 very short scenes");
+    expect(b.system).toContain("Factual documentary scripting and visual proof");
+    expect(b.system).not.toContain("Scenes 20–60 seconds each.");
+
+    const c = await capture((d) => scriptDoctor(brief, story, script, d));
+    expect(c.system).toContain("Factual integrity and retention rejection checks");
+    expect(c.system).toContain("REJECT_STORY:");
+  });
+
   it("hikâye mimarı bölüm dilini ve süreyi verir", async () => {
     const a = await capture((d) => storyArchitect(brief, d));
     expect(a.system).toContain("episode language (tr)");

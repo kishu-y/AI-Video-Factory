@@ -3,6 +3,7 @@ import type { ResearchContext } from "@ys/core";
 import { RESEARCH_POLICY, SCRIPT_CLAIM_POLICY, researchBlock } from "./research.ts";
 import { customStyleBlock } from "@ys/core";
 import { MOTION_DESIGN_POLICY, MOTION_REVIEW_POLICY, SHOT_INTENT_POLICY } from "./motion-design.ts";
+import { STORY_RETENTION_POLICY, SCRIPT_RETENTION_POLICY, DOCTOR_RETENTION_POLICY, storyScenePacing } from "./story-retention.ts";
 import { lessonsBlock, models, runStructured, type AgentDeps, type AgentImage, type AgentResult } from "./runner.ts";
 import { CastOut, FrameReviewOut, ScriptDoctorOut, ScriptOut, ShotPlanOut, StoryOut, StyleBibleOut } from "./schemas.ts";
 
@@ -99,16 +100,17 @@ export function storyArchitect(brief: EpisodeBrief, deps?: AgentDeps): Promise<A
       model: models().creative,
       effort: "high",
       schema: StoryOut,
-      system: `You design long-form YouTube stories built for retention, like the best narrative explainer channels.
+      system: `You design original narrative YouTube episodes for sustained attention across formats from 10-second micro-shorts to longer animated stories.
 Rules:
-- Cold open in the middle of a concrete, surprising moment (a person, a place, a decision) — not a definition or a date list. The hook must state a question the viewer needs answered.
+- Cold open on a visible, concrete anomaly or consequential action; the viewer should perceive a specific question in the opening frame without requiring narration.
 - Give the story a human spine: someone who wants something, an obstacle, rising stakes, a turn. Facts serve the story, not the other way round.
-- Structure: hook → setup → escalation → midpoint twist → crisis → payoff → short reflection that reframes the hook. Re-hook every 60–90 seconds with an open loop the next beat pays off.
+- Structure according to duration: hook → escalating new information and character choices → earned turn → consequence/payoff. A ten-second episode cannot contain the same number of beats as a two-minute story.
 - Be specific: real names, dates, numbers and places that are well established. Never invent facts; if a detail is uncertain, leave it out.
 - Avoid clichés ("in a world", "little did they know", "changed everything forever"), listicles and calls to subscribe.
-- Every beat names one visual set-piece that a simple flat illustration can show.
+- Every beat names a visible, storyboard-able action, discovery or emotional reaction. Never rely on a still frame to perform an unsupported physical action.
 - Beat durations must sum to the target duration (±10%).
 - Write title, logline, premise, hook and beat summaries in the episode language (${brief.lang}).
+${STORY_RETENTION_POLICY}
 ${RESEARCH_POLICY}`,
       prompt: `Topic: ${brief.topic}\nEpisode language: ${brief.lang}\nTarget duration: ${brief.targetSec} seconds\nAudience: ${brief.audience ?? "general"}${researchBlock(brief.research)}`,
     },
@@ -137,11 +139,12 @@ export function screenwriter(brief: EpisodeBrief, story: StoryOut, deps?: AgentD
       system: `You write voice-over narration for animated YouTube videos.
 Rules:
 - Narration language: ${brief.lang}. Write for the ear: one idea per sentence, varied sentence length, concrete nouns and verbs, show don't tell.
-- Total narration ≈ ${targetWords} words (${wpm} wpm for this voice/language). This is a hard length budget: stay within ±10%. Scenes 20–60 seconds each.
+- Total narration ≈ ${targetWords} words (${wpm} wpm for this voice/language). This is a hard length budget: stay within ±10%. ${storyScenePacing(brief.targetSec)}
 - Open with the story's hook moment, not a greeting. End every scene with a forward pull (a question, a consequence, a "but") that the next scene answers. Use callbacks to earlier details.
 - No filler ("as we all know", "interestingly"), no repetition of the same fact, rhetorical questions at most once per scene, no calls to subscribe.
 - Narration must be speakable: no brackets, emojis, stage directions or URLs. ${NUMBERS_AND_NAMES}
-- visualIntent (English) lists 2–3 concrete visual moments for a simple flat illustration (who is there, what they do, which object matters). location is in English; reuse location names exactly.${lessonsBlock(brief.lessons)}
+- visualIntent (English) lists 2–3 renderable visual moments (who acts, readable clue or object, face reaction, camera size). location is in English; reuse location names exactly.${lessonsBlock(brief.lessons)}
+${SCRIPT_RETENTION_POLICY}
 ${RESEARCH_POLICY}
 ${SCRIPT_CLAIM_POLICY}`,
       prompt: `Story:\n${JSON.stringify(story, null, 2)}${researchBlock(brief.research)}`,
@@ -165,13 +168,14 @@ export function scriptDoctor(brief: EpisodeBrief, story: StoryOut, draft: Script
       schema: ScriptDoctorOut,
       system: `You are a script doctor for narrative YouTube explainers. Critique the draft, then return an improved full script.
 Check and fix:
-- Hook: do the first two sentences drop the viewer into a concrete moment and pose a question? If not, rewrite them.
+- Hook: does the first *visual moment* contain a concrete anomaly, consequential action, or specific emotional question? If not, rewrite the opening narration and visualIntent.
 - Clarity: could a curious 15-year-old follow every step? Define jargon in passing with an image, not a lecture.
 - Pacing: cut repetition and filler; every scene must move the story; each scene ends with a forward pull.
 - Accuracy: remove or soften any claim that is not well established. Never add new facts you are unsure of.
 - Speakability in ${brief.lang}: short sentences, no tongue-twisters. ${NUMBERS_AND_NAMES}
 - Length: keep total narration ≈ ${targetWords} words (±10%).
-Keep scene ids, beatIds and location names unchanged; you may rewrite narration, emotion and visualIntent. notes: the most important problems you fixed, in English, one line each, phrased as general rules a writer should follow next time.${lessonsBlock(brief.lessons)}
+Keep scene ids, beatIds and location names unchanged; you may rewrite narration, emotion and visualIntent. notes: the most important problems you fixed in English; report a structural failure using REJECT_STORY: if it cannot be repaired within this schema.${lessonsBlock(brief.lessons)}
+${DOCTOR_RETENTION_POLICY}
 ${RESEARCH_POLICY}
 ${SCRIPT_CLAIM_POLICY}`,
       prompt: `Story:\n${JSON.stringify(story, null, 2)}\n\nDraft script:\n${JSON.stringify(draft, null, 2)}${researchBlock(brief.research)}`,
